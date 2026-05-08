@@ -1,0 +1,237 @@
+using System.ComponentModel.Design;
+
+List<string> pessoas = new List<string>();
+string s, name;
+int o;
+bool encontrou;
+while (true)
+
+{
+
+    Console.WriteLine("1 Cadastrar");
+    Console.WriteLine("2 Listar");
+    Console.WriteLine("3 Remover");
+    Console.WriteLine("4 Sair");
+    Console.WriteLine("5 Limpar");
+    Console.WriteLine("6 Editar");
+    s = Console.ReadLine();
+    if (!int.TryParse(s, out o))
+    {
+        Console.WriteLine("Digite um número válido: ");
+        continue;
+    }
+    o = int.Parse(s);
+
+    if (o == 0 | o == 1 | o == 2 | o == 3 | o == 4 | o == 5 | o == 6)
+    {
+
+        switch (o)
+        {
+            case 1:
+                encontrou = false;
+                Console.WriteLine("Cadastre seu nome: ");
+                name = Console.ReadLine().ToLower();
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine("Nome ínvalido");
+                }
+                else
+                {
+                    foreach (string p in pessoas)
+
+
+                        if (name == p)
+                        {
+
+                            encontrou = true;
+                        }
+                    if (encontrou == true)
+                    {
+                        Console.WriteLine("Esse nome já está cadastrado");
+                        continue;
+
+
+                    }
+
+
+
+                    else
+                    {
+
+                        pessoas.Add(name);
+                        Console.WriteLine(name + " foi cadastrado com sucesso!");
+                        Console.WriteLine("Total Cadastrado:" + pessoas.Count);
+
+                    }
+                }
+                break;
+
+            case 2:
+                
+                if
+                    (pessoas.Count == 0)
+                {
+                    Console.WriteLine("Nenhuma pessoa cadastrada");
+                }
+                int i = 1;
+                foreach (string p in pessoas)
+                { 
+                    Console.WriteLine(i + "-" + p);
+                    i++;
+                 }
+                break;
+                
+            case 3:
+                if
+                    (pessoas.Count == 0)
+                {
+                    Console.WriteLine("Nenhuma pessoa cadastrada");
+                }
+                else { 
+               int r = 1;
+                
+                
+                    Console.WriteLine("Digite o número do nome que quer remover: " );
+                     
+                foreach (string p in pessoas)
+                {
+                    Console.WriteLine(r + "-" + p);
+                    r++;
+                }
+                name = Console.ReadLine();
+                if (!int.TryParse(name, out int num))
+                {
+                    Console.WriteLine("Digite um número válido: ");
+                    continue;
+                }
+                   
+                    int ind = num - 1;
+
+                    if (ind >= 0 && ind < pessoas.Count)
+                    {
+                        string rem = pessoas[ind];
+                        string c;
+
+
+                        Console.WriteLine("Tem Certeza que quer remover " + rem);
+                        Console.WriteLine("Sim/Nao");
+                        c = Console.ReadLine().ToLower();
+
+                      
+
+
+                        if (c == "n" || c == "nao")
+                        {
+                            continue;
+
+                        }
+                      
+                            else if (c == "s" || c == "sim")
+                            {
+                                pessoas.RemoveAt(ind);
+                    Console.WriteLine("Voce removeu:" + rem);
+                            
+                }
+                        
+                        
+                        else
+                        {
+                            Console.WriteLine("Opção inválida, tente novamente."); 
+                        }
+                         }
+                     
+                else
+                {
+                    Console.WriteLine("Nome não encontrado");
+                }
+                     }
+                     
+                break;
+                     
+                     
+            case 4:
+                return;
+
+            case 5:
+                Console.Clear();
+                break;
+
+            case 6:
+                if
+                    (pessoas.Count == 0)
+                {
+                    Console.WriteLine("Nenhuma pessoa cadastrada");
+                }
+                else
+                {
+                    int k = 1;
+
+
+                    Console.WriteLine("Digite o número do nome que quer editar: ");
+
+                    foreach (string p in pessoas)
+                    {
+                        Console.WriteLine(k + "-" + p);
+                        k++;
+                    }
+                    name = Console.ReadLine();
+                    if (!int.TryParse(name, out int num))
+                    {
+                        Console.WriteLine("Digite um número válido: ");
+                        continue;
+                    }
+                    int indi = num - 1;
+                    if (indi >= 0 && indi < pessoas.Count)
+                    {
+
+
+                        Console.WriteLine("Digite o novo nome");
+   
+                        
+                        name = Console.ReadLine();
+                      
+                        if (string.IsNullOrEmpty(name))
+                        {
+                            Console.WriteLine("Nome ínvalido");
+                        }
+
+                        else
+                        {
+                            encontrou = false;
+                            foreach (string p in pessoas)
+                                
+
+
+                            if (name == p)
+                                {
+
+                                    encontrou = true;
+                                }
+                            if (encontrou == true)
+                            {
+                                Console.WriteLine("Esse nome já está cadastrado");
+                                continue;
+
+
+                            }
+                            pessoas.RemoveAt(indi);
+                            pessoas.Add(Convert.ToString(name));
+                            Console.WriteLine("Seu nome foi editado com sucesso");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nome não encontrado");
+                    }
+                }
+
+                break;
+    }
+         }
+    else 
+    {
+        Console.WriteLine("Opção inválida, tente novamente.");
+        continue;
+    }
+}
+ 
